@@ -44,9 +44,9 @@ authRoutes.post('/signup', (req, res, next) => {
         name: name,
         gradDate: gradDate,
         phoneNum: phoneNum,
-        admin: admin,
-        resume: resume,
-        profilePic: resume
+        admin: admin
+        // resume: resume,
+        // profilePic: profilePic
       });
   
       theUser.save((err) => {

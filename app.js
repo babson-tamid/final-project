@@ -78,4 +78,7 @@ app.use('/', index);
 const authRoutes = require('./routes/authRoutes');
 app.use('/api', authRoutes);
 
+const newsRoutes = require('./routes/newsRoutes');
+app.use('/api', newsRoutes);
+
 module.exports = app;

@@ -7,9 +7,9 @@ const userSchema = new Schema({
   name: String,
   gradDate: String,
   phoneNum: String,
-  admin: Boolean,
-  resume: String,
-  profilePic: String
+  admin: Boolean
+  // resume: String,
+  // profilePic: String
 
 
 
