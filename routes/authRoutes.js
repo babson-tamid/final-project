@@ -14,6 +14,7 @@ authRoutes.post('/signup', (req, res, next) => {
     const password = req.body.password;
     const name = req.body.name;
     const gradDate = req.body.gradDate;
+    const position = req.body.position;
     const phoneNum = req.body.phoneNum;
     const admin = req.body.admin;
     const resume = req.body.resume;
@@ -44,9 +45,9 @@ authRoutes.post('/signup', (req, res, next) => {
         name: name,
         gradDate: gradDate,
         phoneNum: phoneNum,
-        admin: admin
-        // resume: resume,
-        // profilePic: profilePic
+        admin: admin,
+        resume: resume,
+        profilePic: profilePic
       });
   
       theUser.save((err) => {

@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
+const User = require('./user');
 
 const newsSchema = new Schema({
-  creator: String,
+  creator: {type: Schema.Types.ObjectId, ref: 'User'},
   title: String, 
   description: String,
   imgPath: String
