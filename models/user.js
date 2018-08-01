@@ -14,7 +14,7 @@ const userSchema = new Schema({
     default:'member' 
   },
   resume: String,
-  profilePic: String
+  profilePic: String  
 
 }, {
   timestamps: true

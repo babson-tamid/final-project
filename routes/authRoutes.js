@@ -6,67 +6,135 @@ const passport   = require('passport');
 
 const User       = require('../models/user');
 
+authRoutes.post('/checkemail', (req, res, next) => {
+  const email = req.body.email;
+
+  User.findOne({ email }, '_id', (err, foundUser) => {
+    if (!foundUser) {
+      res.status(400).json({ message: 'Email is not registered with Babson Tamid' });
+      return;
+    } else {
+      console.log('user is: ', foundUser)
+      res.status(200).json(foundUser);
+    }
+  })
+})
+
 
 
 // this is a comment
-authRoutes.post('/signup', (req, res, next) => {
-    const email = req.body.email;
+authRoutes.post('/user/:id/finish-signup', (req, res, next) => {
+    
     const password = req.body.password;
     const name = req.body.name;
-    const gradDate = req.body.gradDate;
-    const position = req.body.position;
     const phoneNum = req.body.phoneNum;
-    const admin = req.body.admin;
-    const resume = req.body.resume;
-    const profilePic = req.body.profilePic;
-
+   
   
-    if (!email || !password) {
-      res.status(400).json({ message: 'Provide email and password' });
+    if (!password) {
+      res.status(400).json({ message: 'Provide password.' });
       return;
     }
-    if (password.length < 7){
+    if (!email.includes("babson.edu")) {
+      res.status(400).json({ message: 'Must be a @babson.edu address'});
+      return;
+    }
+    if (password.length <= 7){
         res.status(400).json({ message: 'Please make your password at least 7 digits'})
         return;
     }
+
+
   
-    User.findOne({ email }, '_id', (err, foundUser) => {
-      if (foundUser) {
-        res.status(400).json({ message: 'The email already exists' });
+    const salt     = bcrypt.genSaltSync(10);
+    const hashPass = bcrypt.hashSync(password, salt);
+  
+
+      User.findById(req.params.id)
+      .then( (foundUser) => {
+        foundUser.name = name;
+        foundUser.phoneNum = phoneNum;
+        foundUser.password = hashPass;
+
+
+        foundUser.save()
+        .then( updUser => {
+          res.status(200).json(updUser)
+        } )
+        .catch( err => res.json(err))
+      } )
+      .catch( err => res.json(err))
+  
+      
+});
+
+authRoutes.post('/apply', (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const name = req.body.name;
+  const gradDate = req.body.gradDate;
+  const phoneNum = req.body.phoneNum;
+  const role = req.body.role;
+  const resume = req.body.resume;
+  const profilePic = req.body.profilePic;
+
+
+  if (!email || !password) {
+    res.status(400).json({ message: 'Provide email and password' });
+    return;
+  }
+  if (!email.includes("babson.edu")) {
+    res.status(400).json({ message: 'Must be a @babson.edu address'});
+    return;
+  }
+  if (!email.prototype.includes) {
+    email.prototype.includes = function(search, start) {
+      '@babson.edu'}
+    res.status(400).json({ message: 'Must be a @babson.edu address'});
+    return;
+  }
+
+  if (password.length < 7){
+      res.status(400).json({ message: 'Please make your password at least 7 digits'})
+      return;
+  }
+
+  User.findOne({ email }, '_id', (err, foundUser) => {
+    if (foundUser) {
+      res.status(400).json({ message: 'The email already exists' });
+      return;
+    }
+
+    const salt     = bcrypt.genSaltSync(10);
+    const hashPass = bcrypt.hashSync(password, salt);
+
+    const theUser = new User({
+      email: email,
+      password: hashPass,
+      name: name,
+      gradDate: gradDate,
+      phoneNum: phoneNum,
+      role: 'applicant',
+      resume: resume,
+      profilePic: profilePic
+    });
+
+    theUser.save((err) => {
+      if (err) {
+        res.status(400).json({ message: 'Something went wrong' });
         return;
       }
-  
-      const salt     = bcrypt.genSaltSync(10);
-      const hashPass = bcrypt.hashSync(password, salt);
-  
-      const theUser = new User({
-        email: email,
-        password: hashPass,
-        name: name,
-        gradDate: gradDate,
-        phoneNum: phoneNum,
-        admin: admin,
-        resume: resume,
-        profilePic: profilePic
-      });
-  
-      theUser.save((err) => {
+
+      req.login(theUser, (err) => {
         if (err) {
-          res.status(400).json({ message: 'Something went wrong' });
+          res.status(500).json({ message: 'Something went wrong' });
           return;
         }
-  
-        req.login(theUser, (err) => {
-          if (err) {
-            res.status(500).json({ message: 'Something went wrong' });
-            return;
-          }
-  
-          res.status(200).json(req.user);
-          
-        });
+
+        res.status(200).json(req.user);
+        
       });
     });
+  });
 });
 
 
