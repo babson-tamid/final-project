@@ -8,7 +8,7 @@ const User       = require('../models/user');
 
 
 
-
+// this is a comment
 authRoutes.post('/signup', (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
