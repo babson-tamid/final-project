@@ -4,12 +4,17 @@ const bcrypt     = require('bcryptjs');
 const session    = require('express-session');
 const passport   = require('passport');
 
+const cloudinary = require('cloudinary');
+const uploadCloud = require('../config/cloudinary');
+
 const User       = require('../models/user');
+
 
 authRoutes.post('/checkemail', (req, res, next) => {
   const email = req.body.email;
+  console.log('backend: ',email)
 
-  User.findOne({ email }, '_id', (err, foundUser) => {
+  User.findOne({ email }, (err, foundUser) => {
     if (!foundUser) {
       res.status(400).json({ message: 'Email is not registered with Babson Tamid' });
       return;
@@ -23,12 +28,28 @@ authRoutes.post('/checkemail', (req, res, next) => {
 
 
 // this is a comment
-authRoutes.post('/user/:id/finish-signup', (req, res, next) => {
+authRoutes.post('/user/:id/finish-signup', uploadCloud.array('images', 2), (req, res, next) => {
+
+  console.log(req.files[0])
     
-    const password = req.body.password;
-    const name = req.body.name;
-    const phoneNum = req.body.phoneNum;
+  const email = req.body.email;
+  const password = req.body.password;
+  const name = req.body.name;
+  const gradDate = req.body.gradDate;
+  const phoneNum = req.body.phoneNum;
+  const role = req.body.role;
+  // const thePic = req.files[0].url;
+  // const profilePic = `/uploads/${req.file.filename}`;
    
+
+  // if(req.file){
+  //   newEntry.image = req.file.url;
+      // const theImages = req.files;
+      // theImages.forEach(eachImg =>{
+      //     console.log("each image:", eachImg);
+      //     newEntry.image.push(eachImg.url);
+      // });
+  // }
   
     if (!password) {
       res.status(400).json({ message: 'Provide password.' });
@@ -54,10 +75,16 @@ authRoutes.post('/user/:id/finish-signup', (req, res, next) => {
         foundUser.name = name;
         foundUser.phoneNum = phoneNum;
         foundUser.password = hashPass;
+        if(foundUser.resume === ""){
+          foundUser.resume = thePic;
+        } else if(foundUser.profilePic === ""){
+          foundUser.profilePic = thePic;
+        }
 
 
         foundUser.save()
         .then( updUser => {
+          console.log("MUUUUUFFFFASAAAAAAAAAAAAAA!")
           res.status(200).json(updUser)
         } )
         .catch( err => res.json(err))
@@ -177,6 +204,8 @@ authRoutes.post('/login', (req, res, next) => {
   
     res.status(403).json({ message: 'Unauthorized' });
   });
+
+  
 
 
 

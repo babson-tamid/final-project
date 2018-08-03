@@ -1,4 +1,8 @@
 require('dotenv').config();
+// cloudinary set up
+
+
+
 
 const bodyParser   = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -11,8 +15,10 @@ const path         = require('path');
 const session      = require('express-session');
 const passport     = require('passport');
 
+
 const cors         = require('cors');
 
+require("./config/cloudinary");
 const passportSetup = require('./config/passport');
 
 passportSetup(passport);
