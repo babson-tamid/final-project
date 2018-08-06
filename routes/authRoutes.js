@@ -28,9 +28,9 @@ authRoutes.post('/checkemail', (req, res, next) => {
 
 
 // this is a comment
-authRoutes.post('/user/:id/finish-signup', uploadCloud.array('images', 2), (req, res, next) => {
+authRoutes.post('/user/:id/finish-signup',  (req, res, next) => {
 
-  console.log(req.files[0])
+  // console.log(req.files[0])
     
   const email = req.body.email;
   const password = req.body.password;
@@ -75,11 +75,14 @@ authRoutes.post('/user/:id/finish-signup', uploadCloud.array('images', 2), (req,
         foundUser.name = name;
         foundUser.phoneNum = phoneNum;
         foundUser.password = hashPass;
-        if(foundUser.resume === ""){
-          foundUser.resume = thePic;
-        } else if(foundUser.profilePic === ""){
-          foundUser.profilePic = thePic;
-        }
+        // if(foundUser.resume === ""){
+        //   foundUser.resume = thePic;
+        // } else if(foundUser.profilePic === ""){
+        //   foundUser.profilePic = thePic;
+        // }
+        // foundUser.resume = req.files[0].url;
+        // foundUser.profilePic = req.files[1].url;
+
 
 
         foundUser.save()
@@ -206,7 +209,8 @@ authRoutes.post('/login', (req, res, next) => {
   });
 
   
-
+  
+  
 
 
 

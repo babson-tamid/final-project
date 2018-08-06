@@ -85,6 +85,9 @@ app.use('/', index);
 const authRoutes = require('./routes/authRoutes');
 app.use('/api', authRoutes);
 
+const userDetails = require('./routes/userDetails');
+app.use('/api', userDetails);
+
 const newsRoutes = require('./routes/newsRoutes');
 app.use('/api', newsRoutes);
 
