@@ -1,4 +1,8 @@
 require('dotenv').config();
+// cloudinary set up
+
+
+
 
 const bodyParser   = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -8,12 +12,15 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
-// const cors         = require('cors');
 const session      = require('express-session');
 const passport     = require('passport');
 
 
+const cors         = require('cors');
+
+require("./config/cloudinary");
 const passportSetup = require('./config/passport');
+
 passportSetup(passport);
 
 
@@ -67,16 +74,19 @@ app.use(passport.session());
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
 
-// app.use(cors({
-//   credentials: true,
-//   origin: ['http://localhost:4200']
-// }));
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:4200']
+}));
 
 const index = require('./routes/index');
 app.use('/', index);
 
 const authRoutes = require('./routes/authRoutes');
 app.use('/api', authRoutes);
+
+const userDetails = require('./routes/userDetails');
+app.use('/api', userDetails);
 
 const newsRoutes = require('./routes/newsRoutes');
 app.use('/api', newsRoutes);

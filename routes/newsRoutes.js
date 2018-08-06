@@ -15,10 +15,10 @@ router.get('/newsletter', (req, res, next) => {
 
 router.post('/newsletter/create', (req, res, next)=>{
     Newsletter.create({
-        creator: req.body.creator,
+        creator: req.user._id,
         title: req.body.title, 
         description: req.body.description,
-        imgPath: req.body.imgPath
+        // imgPath: req.body.imgPath
 
     
     })
@@ -46,10 +46,9 @@ router.get('/newsletter/:id', (req, res, next) => {
 
 router.post('/newsletter/:id/update', (req, res, next)=>{
     Newsletter.findByIdAndUpdate(req.params.id, {
-        creator: req.body.creator,
         title: req.body.title, 
         description: req.body.description,
-        imgPath: req.body.imgPath
+        // imgPath: req.body.imgPath
         
     })
     .then((oneNewsletter)=>{
