@@ -10,6 +10,10 @@ const uploadCloud = require('../config/cloudinary');
 const User       = require('../models/user');
 
 
+userDetails.get('/userDetails/:id', (req, res, next) => {
+    
+});
+
 userDetails.post('/userDetails', (req, res, next) => {
     passport.authenticate('local', (err, theUser, failureDetails) => {
       if (err) {
@@ -57,24 +61,33 @@ userDetails.post('/userDetails', (req, res, next) => {
         
         
     });
-    
-//     userDetails.post ('/profilePic', (req, res, next) => {
-      
-      
-//       User.findById(req.params.id)
-//       .then( (foundUser) => {
-          
-//           foundUser.profilePic = req.files[0].url;
-//           theUser.save((err) => {
-//               if (err) {
-//                 res.status(400).json({ message: 'Something went wrong' });
-//                 return;
-//               }
+
+
+    userDetails.post ('/profilePic', uploadCloud.single('image'),(req, res, next) => {
+        console.log("hererererer: ", req.file.url)
+        console.log(req.user)
         
-//       });
-//       });
-      
-  
-//   });
+        User.findById(req.user._id)
+        .then( (foundUser) => {
+            
+            foundUser.profilePic = req.file.url;
+            
+            
+            foundUser.save((err) => {
+                if (err) {
+                    res.status(400).json({ message: 'Something went wrong' });
+                    return;
+                  }
+                  
+              });
+              
+          });
+          
+          
+      });
+
+
+    
+    
     
   module.exports = userDetails;
