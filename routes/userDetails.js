@@ -39,28 +39,28 @@ userDetails.post('/userDetails', (req, res, next) => {
   });
 
   
-  userDetails.post ('/resume', uploadCloud.single('image'),(req, res, next) => {
-      console.log("hererererer: ", req.file.url)
-      console.log(req.user)
+//   userDetails.post ('/resume', uploadCloud.single('image'),(req, res, next) => {
+//       console.log("hererererer: ", req.file.url)
+//       console.log(req.user)
       
-      User.findById(req.user._id)
-      .then( (foundUser) => {
+//       User.findById(req.user._id)
+//       .then( (foundUser) => {
           
-          foundUser.resume = req.file.url;
+//           foundUser.resume = req.file.url;
           
           
-          foundUser.save((err) => {
-              if (err) {
-                  res.status(400).json({ message: 'Something went wrong' });
-                  return;
-                }
+//           foundUser.save((err) => {
+//               if (err) {
+//                   res.status(400).json({ message: 'Something went wrong' });
+//                   return;
+//                 }
                 
-            });
+//             });
             
-        });
+//         });
         
         
-    });
+//     });
 
 
     userDetails.post ('/profilePic', uploadCloud.single('image'),(req, res, next) => {

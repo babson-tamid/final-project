@@ -17,14 +17,13 @@ router.get('/newsletter', (req, res, next) => {
 
 });
 
-router.post('/newsletter/create', (req, res, next)=>{
+router.post('/newsletter/create', uploadCloud.single('image'), (req, res, next)=>{
+    console.log('body: ', req.body)
     Newsletter.create({
-        creator: req.user._id,
+        creator: req.body.creator,
         title: req.body.title, 
         description: req.body.description,
-        // imgPath: req.body.imgPath
-
-    
+        imgPath: req.file.url
     })
     .then((response)=>{
         res.json(response);
@@ -48,11 +47,14 @@ router.get('/newsletter/:id', (req, res, next) => {
 });
 
 
-router.post('/newsletter/:id/update', (req, res, next)=>{
+router.post('/newsletter/:id/update', uploadCloud.single('image'), (req, res, next)=>{
+    console.log('BODY:', req.body)
+
     Newsletter.findByIdAndUpdate(req.params.id, {
+        creator: req.body.creator,
         title: req.body.title, 
         description: req.body.description,
-        // imgPath: req.body.imgPath
+        imgPath: req.body.imgPath
         
     })
     .then((oneNewsletter)=>{

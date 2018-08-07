@@ -38,6 +38,7 @@ authRoutes.post('/user/:id/finish-signup',  (req, res, next) => {
   const gradDate = req.body.gradDate;
   const phoneNum = req.body.phoneNum;
   const role = req.body.role;
+  const linkedInUrl = req.body.linkedInUrl;
   // const thePic = req.files[0].url;
   // const profilePic = `/uploads/${req.file.filename}`;
    
@@ -75,6 +76,8 @@ authRoutes.post('/user/:id/finish-signup',  (req, res, next) => {
         foundUser.name = name;
         foundUser.phoneNum = phoneNum;
         foundUser.password = hashPass;
+        foundUser.gradDate = gradDate;
+        foundUser.linkedInUrl = linkedInUrl;
         // if(foundUser.resume === ""){
         //   foundUser.resume = thePic;
         // } else if(foundUser.profilePic === ""){
@@ -104,8 +107,8 @@ authRoutes.post('/apply', (req, res, next) => {
   const gradDate = req.body.gradDate;
   const phoneNum = req.body.phoneNum;
   const role = req.body.role;
-  const resume = req.body.resume;
-  const profilePic = req.body.profilePic;
+  const linkedInUrl = req.body.linkedInUrl;
+  // const resume = req.body.resume;
 
 
   if (!email || !password) {
@@ -116,12 +119,12 @@ authRoutes.post('/apply', (req, res, next) => {
     res.status(400).json({ message: 'Must be a @babson.edu address'});
     return;
   }
-  if (!email.prototype.includes) {
-    email.prototype.includes = function(search, start) {
-      '@babson.edu'}
-    res.status(400).json({ message: 'Must be a @babson.edu address'});
-    return;
-  }
+  // if (!email.prototype.includes) {
+  //   email.prototype.includes = function(search, start) {
+  //     '@babson.edu'}
+  //   res.status(400).json({ message: 'Must be a @babson.edu address'});
+  //   return;
+  // }
 
   if (password.length < 7){
       res.status(400).json({ message: 'Please make your password at least 7 digits'})
@@ -143,8 +146,9 @@ authRoutes.post('/apply', (req, res, next) => {
       name: name,
       gradDate: gradDate,
       phoneNum: phoneNum,
+      linkedInUrl: linkedInUrl,
       role: 'applicant',
-      resume: resume,
+      // resume: resume,
       profilePic: profilePic
     });
 
@@ -191,6 +195,9 @@ authRoutes.post('/login', (req, res, next) => {
       });
     })(req, res, next);
   });
+
+
+
 
   
   authRoutes.post('/logout', (req, res, next) => {

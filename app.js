@@ -91,4 +91,8 @@ app.use('/api', userDetails);
 const newsRoutes = require('./routes/newsRoutes');
 app.use('/api', newsRoutes);
 
+const userRoutes = require('./routes/userRoutes');
+app.use('/api', userRoutes);
+
+
 module.exports = app;
