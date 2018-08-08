@@ -94,5 +94,9 @@ app.use('/api', newsRoutes);
 const userRoutes = require('./routes/userRoutes');
 app.use('/api', userRoutes);
 
+app.use((req, res, next)=>{
+  res.sendfile(_dirname + '/public/index.html')
+})
+
 
 module.exports = app;
