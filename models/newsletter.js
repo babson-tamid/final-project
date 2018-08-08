@@ -3,7 +3,7 @@ const Schema   = mongoose.Schema;
 const User = require('./user');
 
 const newsSchema = new Schema({
-  creator: {type: Schema.Types.ObjectId, ref: 'User'},
+  creator: String,
   title: String, 
   description: String,
   imgPath: String

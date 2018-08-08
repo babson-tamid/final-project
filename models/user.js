@@ -11,12 +11,13 @@ const userSchema = new Schema({
   position: String,
   gradDate: String,
   phoneNum: String,
+  linkedInUrl: String,
   role: { 
     type: String, 
     enum: ['admin', 'member', 'applicant'], 
     default:'member' 
   },
-  resume: String,
+  // resume: String,
   profilePic: String  
 
 }, {
