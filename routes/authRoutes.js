@@ -149,7 +149,7 @@ authRoutes.post('/apply', (req, res, next) => {
       linkedInUrl: linkedInUrl,
       role: 'applicant',
       // resume: resume,
-      profilePic: profilePic
+  
     });
 
     theUser.save((err) => {
@@ -170,6 +170,18 @@ authRoutes.post('/apply', (req, res, next) => {
     });
   });
 });
+
+// foundUser.save()
+// .then( updUser => {
+//   console.log("MUUUUUFFFFASAAAAAAAAAAAAAA!")
+//   res.status(200).json(updUser)
+// } )
+// .catch( err => res.json(err))
+// } )
+// .catch( err => res.json(err))
+
+
+
 
 
 authRoutes.post('/login', (req, res, next) => {
