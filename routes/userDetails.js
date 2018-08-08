@@ -86,6 +86,17 @@ userDetails.post('/userDetails', (req, res, next) => {
           
       });
 
+    userDetails.post('/deleteProfilePic/:id', (req, res, next) =>{
+        User.findByIdAndRemove(req.user._id)
+        .then((foundUser)=>{
+            foundUser.profilePic = req.file.url;
+            res.json(foundUser.profilePic);
+        })
+        .catch((err)=>{
+            res.json(err);
+        })
+    })
+
 
     
     
