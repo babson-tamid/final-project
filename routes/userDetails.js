@@ -87,10 +87,18 @@ userDetails.post('/userDetails', (req, res, next) => {
       });
 
     userDetails.post('/deleteProfilePic/:id', (req, res, next) =>{
-        User.findByIdAndRemove(req.user._id)
+        console.log("the users id when deleting profile image from api ********************* ", req.params.id);
+        User.findById(req.params.id)
         .then((foundUser)=>{
-            foundUser.profilePic = req.file.url;
-            res.json(foundUser.profilePic);
+            foundUser.set({profilePic: ''});
+            foundUser.save()
+            .then((userAfterUpdate) => {
+                console.log("user info after deleting image -------------------", userAfterUpdate);
+                res.status(200).json(userAfterUpdate)
+            })
+            .catch((err) => {
+                res.status(500).json({message: "Error when deleting image"});
+            })
         })
         .catch((err)=>{
             res.json(err);
