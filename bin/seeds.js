@@ -151,7 +151,7 @@ const usersArray = [
 		},
 		{
 		email : "aaragao1@babson.edu",
-		password: "",
+		password: "$2a$10$i4U9hWz53Id7Wntdq1axfeiiiqZIJJa7i43MKDAZpqGWtBmGMBG5O",
 		name: "Alexander Aragao",
 		position : "Treasurer",
 		gradDate: 2021,
