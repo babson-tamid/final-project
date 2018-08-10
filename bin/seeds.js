@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const User = require('../models/user');
 
-
-const dbName = 'tamid-babson'
-mongoose.connect(`mongodb://localhost/${dbName}`);
+console.log('is this db: ',process.env.MONGODB_URI )
+// const dbName = 'tamid-babson'
+// mongoose.connect(`mongodb://localhost/${dbName}`);
+mongoose.connect(process.env.MONGODB_URI);
 
 const usersArray = [
     {
@@ -14,7 +15,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 5164480069,
 		role: "admin",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -25,7 +26,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 6173198423,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -36,7 +37,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 9172705120,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -47,7 +48,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 3055273868,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -58,7 +59,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 7869859542,
 		role: "admin",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -69,7 +70,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 3057219405,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -80,7 +81,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 594000000000,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -91,7 +92,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 3057782963,
 		role: "admin",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -102,7 +103,7 @@ const usersArray = [
 		gradDate: 2020,
 		phoneNum: 6177554371,
 		role: "admin",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -113,7 +114,7 @@ const usersArray = [
 		gradDate: 2020,
 		phoneNum: 9178281420,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -124,7 +125,7 @@ const usersArray = [
 		gradDate: 2020,
 		phoneNum: 7814932354,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -135,7 +136,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 6318710867,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -145,18 +146,18 @@ const usersArray = [
 		position : "Investing",
 		gradDate: 2021,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
 		email : "aaragao1@babson.edu",
-		password: "",
+		password: "$2a$10$i4U9hWz53Id7Wntdq1axfeiiiqZIJJa7i43MKDAZpqGWtBmGMBG5O",
 		name: "Alexander Aragao",
 		position : "Treasurer",
 		gradDate: 2021,
 		phoneNum: 3054981852,
 		role: "admin",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -167,7 +168,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 3057984151,
 		role: "admin",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -178,7 +179,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 7868386390,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -189,7 +190,7 @@ const usersArray = [
 		gradDate: 2020,
 		phoneNum: 3053085948,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -200,7 +201,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 7876434141,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -211,7 +212,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 7862666699,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -222,7 +223,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 3057108245,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -233,7 +234,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 16177753606,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -244,7 +245,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 3059046313,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -255,7 +256,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 7863257479,
 		role: "admin",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -266,7 +267,7 @@ const usersArray = [
 		gradDate: 2021,
 		phoneNum: 6467736685,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -276,7 +277,7 @@ const usersArray = [
 		position : "Investing",
 		gradDate: 2021,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		},
 		{
@@ -286,7 +287,7 @@ const usersArray = [
 		position : "Consulting",
 		gradDate: 2021,
 		role: "member",
-		resume: "",
+		linkedInUrl: "",
 		profilePic: ""
 		}
 ]

@@ -108,7 +108,7 @@ authRoutes.post('/apply', (req, res, next) => {
   const phoneNum = req.body.phoneNum;
   const role = req.body.role;
   const linkedInUrl = req.body.linkedInUrl;
-  // const resume = req.body.resume;
+// const resume = req.body.resume;
 
 
   if (!email || !password) {

@@ -26,7 +26,7 @@ passportSetup(passport);
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/tamid-babson', {useMongoClient: true})
+  .connect(process.env.MONGODB_URI, {useMongoClient: true})
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
@@ -76,7 +76,7 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:4200']
+  origin: ['http://localhost:4200', 'https://babsontamid.herokuapp.com']
 }));
 
 const index = require('./routes/index');
